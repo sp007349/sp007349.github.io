@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>About-Us</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/jquery-1.12.4.min.js"></script>
+    <script src="/vue.js"></script>
+    <script src="/all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js"></script>
+    <script src="/javascripts/vendor.js"></script>
+</head>
+
+<body>
+
+    <div class="index_main" id="app">
+
+        <div class="heard">
+            <div class="logo">
+                <img src="/img/logo.png" alt="logo">
+
+                <div class="search">
+                    <form action="Index.html">
+                        <input type="text" name="search" style="height: 23px;">
+                        <input type="submit" value="search"
+                            style="background-image:url(/img/search_btn.jpg);width:33px;height:29px;">
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="content">
+
+            <ul class="menu">
+                <li><a href="/page/About-Us.html">關於我們</a></li>
+                <li><a href="/index.html">回到首頁</a></li>
+                <li><a href="/page/Contact-Us.html">聯繫我們</a></li>
+                <li><a href="/page/Product.html">產品介紹</a>
+                    <ul class="menu01">
+                        <div class="m01box"></div>
+                        <li><a href="#">熱板塑料焊接機</a></li>
+                        <li><a href="#">高頻塑料焊接機</a></li>
+                        <li><a href="#">聲波塑料焊接機</a></li>
+                        <li><a href="#">PE管封口機</a></li>
+                        <li><a href="#">通用機械</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="allshow">
+
+
+                <div class="slideShow">
+                    <!--圖片佈局開始-->
+                    <div class="slideShow2">
+                        <ul>
+                            <li v-for="item in products" :key="item.id"><a href="#">
+                                    <div class="mark">產品資訊</div><img :src="item.imageUrl" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--圖片佈局結束-->
+                    <!--按鈕佈局開始-->
+                    <div class="showNav">
+                        <span class="active">1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                    </div>
+                    <!--按鈕佈局結束-->
+                </div>
+
+
+            </div>
+
+            <div class="AU">
+                <H1 style="margin-top:30px;">About Us</H1>
+                <p>
+                    Our company namely Pan Digital Technology Sdn Bhd. register and incorporated in Malaysia since 25th
+                    February
+                    2000.We are a trading Company supplying a wide range of Machinery & Equipment in the field of
+                    Plastic
+                    Manufacturing.
+                    <br>
+                    <br>
+                    We are one of the leading suppliers for plastics join and seal machinery in the country. Our type of
+                    machine
+                    was generally applied welding on plastics injection, plastic or P.E. laminated sheet / tube, fabric
+                    and
+                    non-woven. We also specialise in Ultrasonic custom horn & jig design & Maintenance.
+                    <br>
+                    <br>
+                    We have supplied and services to major plastics assembly Industry like Automotive, Medication,
+                    Packaging,
+                    Textile & Garments, Electronic & Electrical, Filter Product, Sanitary & Toiletry Industry, Safety &
+                    Pharmaceutical Industry, Household Product, P.V.C & Canvas, Cosmetic & beauty and etc..
+                </p>
+            </div>
+
+
+        </div>
+
+        <div class="footerTag">
+            <div class="footer">
+                <div class="copyright">
+                    @ 2014 PdtUltrasonic.com . All rights reserved.
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+    function initMap() {
+        if (navigator.geolocation) {
+            var options={timeout:10000};
+            navigator.geolocation.getCurrentPosition(showPosition, showError, options);
+        } else {
+            var x = document.getElementById("demo");
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+        latlon = new google.maps.LatLng(lat, lon)
+        mapholder = document.getElementById("mapholder")
+        mapholder.style.height = "500px";
+        mapholder.style.width = "1100px";
+
+        var myOptions = {
+            center:latlon,zoom:16,
+            mapTypeId:google.maps.MapTypeId.ROADMAP,
+            mapTypeControl:false,
+            navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+        }
+        
+        var map = new google.maps.Map(document.getElementById("mapholder"), myOptions);
+        // Load json data from JSON file
+        var xmlhttp = new XMLHttpRequest();
+        var url = "./kao.json";
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                myFunction(xmlhttp.responseText);
+            }
+        }
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+        
+        function myFunction(response) {
+            var arr = JSON.parse(response);
+        
+            for(var i=0; i<arr.length; i++) {
+                var latLng = new google.maps.LatLng(arr[i].Py,arr[i].Px);
+                var marker = new google.maps.Marker({
+                    position: latLng,  // 圖點位置
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,  // 使用圖圈圖形
+                        strokeColor: "white", // 線條顏色
+                        strokeWeight: 1,      // 線條粗細
+                        fillColor: "red",     // 填充顏色
+                        fillOpacity: 0.3,     // 填充透明度
+                        scale: Math.floor((Math.random()*10)+1)  // 圖形大小
+                    },
+                    title: arr[i].Name,
+                    map: map
+                });
+            }
+        }
+    }
+
+    function showError(error) {
+        var x = document.getElementById("demo");
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                x.innerHTML = "User denied the request for Geolocation."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML = "Location information is unavailable."
+                break;
+            case error.TIMEOUT:
+                x.innerHTML = "The request to get user location timed out."
+                break;
+            case error.UNKNOWN_ERROR:
+                x.innerHTML = "An unknown error occurred."
+                break;
+        }
+    }
+
+    function getLocation() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBIfbQB0j57z6EMB_u2xyO2EeaUlQSXPo0&callback=initMap';
+        document.body.appendChild(script);
+    }
+    </script>
+</head>
+
+<body>
+    <p id="demo">Google Maps JavaScript API Symbol 範例</p>
+    <button onclick="getLocation()">顯示</button>
+    <div id="mapholder"></div>
+</body>
+</html>
