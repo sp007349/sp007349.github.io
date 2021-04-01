@@ -35,7 +35,9 @@ Cmp(1)
         ~KeybdClick($hWnd, 57, 300, 300)
         ~KeybdClick($hWnd, 57, 300, 300)
         ~KeybdClick($hWnd, 57, 300, 300)
-        ~Beep()
+        cmp(1)
+            ~Beep()
+        loop
 	~Dos.System("pause")
     End
 
@@ -49,6 +51,7 @@ Cmp(1)
 
     ~Lib.Sleep(1000)  '延遲毫秒
 
+
 Loop
 
 
@@ -58,8 +61,19 @@ Loop
 
 
 
-
-
+$hWnd = ~DLLMsg("User32.DLL", "int", "FindWindowA", 0, "天堂2M l 小倫兒")
+cmp(1)
+    $Color = ~Lib.FindImage($hWnd, 1143, 814, 1191,839, "7|4|8", 0.8|0|0)
+    ~Dos.Print($Color "\x0a")
+    $Color = ~String.Split($Color, "\x0a")
+    Cmp($Color[0])
+        $Color = ~String.Split($Color[1], " ")
+        ~Dos.Print("X="$Color[1] " Y=" $Color[2] "\x0a")
+    ElCmp()
+        ~Dos.Print("找不到啦\x0a")
+    End
+ ~Lib.Sleep(300)  '延遲毫秒
+loop
 
 
 
